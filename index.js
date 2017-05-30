@@ -1,13 +1,12 @@
-const express = require('express');
-const http = require('http');
+const app = require('express')();
+const server = require('http').createServer(app);
 const url = require('url');
-const WebSocket = require('ws');
-const app = express();
+const ws = require('socket.io')(server);
+const path = require('path');
 
-const server = http.createServer(app);
-const ws = new WebSocket.Server({server});
 let clients = [];
 let busses = [];
+const express = require('express');
 app.use(express.static(__dirname + "/"));
 app.get('/bus',function(req,res){
     res.sendFile(path.join(__dirname + '/bus.html'));
