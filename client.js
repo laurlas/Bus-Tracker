@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io("",{query: "protocol=client"});
+    let ws = io.connect("",{query: "protocol=client"});
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });
