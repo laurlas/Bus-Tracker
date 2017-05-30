@@ -1,23 +1,26 @@
-const app = require('express')();
-const server = require('http').createServer(app);
+const express = require('express');
+const http = require('http');
 const url = require('url');
-const ws = require('socket.io')(server);
-const path = require('path');
+const WebSocket = require('ws');
+const app = express();
 
+const server = http.createServer(app);
+const ws = new WebSocket.Server({server});
 let clients = [];
 let busses = [];
-const express = require('express');
 app.use(express.static(__dirname + "/"));
-app.get('/bus', function (req, res) {
+app.get('/',function(req,res){
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/bus',function(req,res){
     res.sendFile(path.join(__dirname + '/bus.html'));
 });
 
-app.get('/', function (req, res) {
+app.get('/',function(req,res){
     res.sendFile(path.join(__dirname + '/client.html'));
 });
 
 ws.on('connection', function connection(ws) {
-    console.log(ws);
     let bus = false;
     if (ws.protocol) {
         prot = ws.protocol.split('-');
@@ -34,8 +37,6 @@ ws.on('connection', function connection(ws) {
         clients.push(ws);
     }
     ws.on('message', function incoming(message) {
-        console.log(message);
-
         let data = JSON.parse(message);
         if (bus === true) {
             ws.lat = data.lat;
@@ -52,6 +53,5 @@ ws.on('connection', function connection(ws) {
         }
     });
 });
-let port = process.env.PORT || 1337;
+var port = process.env.PORT || 1337;
 server.listen(port);
-console.log('hey');

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io.connect("",{protocol: "client"});
+    let ws = new WebSocket('ws://localhost:1337', "client");
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });
@@ -12,11 +12,11 @@ $(document).ready(function () {
         };
         ws.send(JSON.stringify(request));
     });
-    let markersArray = [];
+    let markersArray=[];
     ws.onmessage = function (response) {
         console.log(response.data);
         locations = JSON.parse(response.data);
-        for (let i = 0; i < markersArray.length; i++) {
+        for (let i = 0; i < markersArray.length; i++ ) {
             markersArray[i].setMap(null);
         }
         markersArray.length = 0;
