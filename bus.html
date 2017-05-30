@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .align-center {
+            text-align: center;
+        }
+        input, #submit {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+        }
+        .submit-msg h4 {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="align-center">Register the bus!</h1>
+    </div>
+    <div class="content">
+        <div class="col-md-12">
+            <input type="text" id="bus-nr" placeholder="Bus #">
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" type="button" id="submit" aria-haspopup="true" aria-expanded="true">Submit
+            </button>
+        </div>
+    </div>
+    <div class="submit-msg align-center hidden">
+        <div class="col-md-12">
+            <h4>Submitted</h4>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0vPXdXMi8ut3fOWv9LvyGZKRASY2PoI8&libraries=places" async
+        defer></script>
+<script src="bus.js"></script>
+</body>
+</html>

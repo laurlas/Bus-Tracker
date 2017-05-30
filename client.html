@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        #map {
+            height: 70%;
+        }
+        .align-center {
+            text-align: center;
+        }
+        input, #submit {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            height:30%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--<div class="jumbotron">-->
+        <!--<h1 class="align-center">Find the bus!</h1>-->
+    <!--</div>-->
+    <div class="content">
+        <div class="col-md-12">
+            <input id="bus-nr" type="text" placeholder="Bus #">
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" type="button" id="submit" aria-haspopup="true" aria-expanded="true">Submit
+            </button>
+        </div>
+    </div>
+</div>
+<div id="map"></div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 15
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+//                addMarker(new google.maps.LatLng(pos.lat, pos.lng));
+                infoWindow.open(map);
+                map.setCenter(pos);
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+//        addMarker(new google.maps.LatLng(44, 55));
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+    function addMarker(location) {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "Hello World!"
+        });
+        //markersArray.push(marker);
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXy0ShzoJQRrnktpjfGBinFFqGTFkFeQY&callback=initMap">
+</script>
+<script src="client.js"></script>
+</body>
+</html>
