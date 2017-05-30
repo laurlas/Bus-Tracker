@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io.connect("",{protocol: "client"});
+    let ws = io.connect("", {protocol: "client"});
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });
@@ -13,7 +13,7 @@ $(document).ready(function () {
         ws.send(JSON.stringify(request));
     });
     let markersArray = [];
-    ws.onmessage = function (response) {
+    ws.on('message', function (response) {
         console.log(response.data);
         locations = JSON.parse(response.data);
         for (let i = 0; i < markersArray.length; i++) {
@@ -28,7 +28,7 @@ $(document).ready(function () {
             });
             markersArray.push(marker);
         }
-    };
+    });
     function geolocate() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {

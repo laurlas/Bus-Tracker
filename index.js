@@ -45,7 +45,8 @@ ws.on('connection', function connection(ws) {
                     bussesSearch[i] = {lat: busses[i].lat, lng: busses[i].lng}
                 }
             }
-            ws.send(JSON.stringify(bussesSearch));
+            clients[client].emit('message', JSON.stringify(statistics));
+            ws.emit('message',JSON.stringify(bussesSearch));
         }
     });
 });
