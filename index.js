@@ -1,20 +1,19 @@
-const express = require('express');
-const http = require('http');
+const app = require('express')();
+const server = require('http').createServer(app);
 const url = require('url');
-const WebSocket = require('ws');
-const app = express();
+const ws = require('socket.io')(server);
+const path = require('path');
 
-const server = http.createServer(app);
-const ws = new WebSocket.Server({server});
 let clients = [];
 let busses = [];
-
-app.get('/bus',function(req,res){
-    res.sendFile('bus.html');
+const express = require('express');
+app.use(express.static(__dirname + "/"));
+app.get('/bus', function (req, res) {
+    res.sendFile(path.join(__dirname + 'bus.html'));
 });
 
-app.get('/',function(req,res){
-    res.sendFile('client.html');
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + 'client.html'));
 });
 
 ws.on('connection', function connection(ws) {
@@ -50,5 +49,5 @@ ws.on('connection', function connection(ws) {
         }
     });
 });
-var port = process.env.PORT || 1337;
+let port = process.env.PORT || 1337;
 server.listen(port);
