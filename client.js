@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io.connect(window.location.origin, {query:"loggeduser=client"});
+    let ws = io.connect("", {query:"loggeduser=client"});
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });

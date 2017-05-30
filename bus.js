@@ -1,7 +1,7 @@
 $(document).ready(function () {
 let ws={};
     $(document).on('click', '#submit', function () {
-        ws = io.connect(window.location.origin,{query:"loggeduser=bus-" + $('#bus-nr').val()});
+        ws = io.connect("",{query:"loggeduser=bus-" + $('#bus-nr').val()});
         ws.addEventListener('error', function (event) {
             alert('Server is closed!');
         });
