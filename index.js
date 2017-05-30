@@ -9,9 +9,6 @@ const ws = new WebSocket.Server({server});
 let clients = [];
 let busses = [];
 app.use(express.static(__dirname + "/"));
-app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
 app.get('/bus',function(req,res){
     res.sendFile(path.join(__dirname + '/bus.html'));
 });
