@@ -1,7 +1,7 @@
 $(document).ready(function () {
     let ws = {};
     $(document).on('click', '#submit', function () {
-        ws = io("bus-" + $('#bus-nr').val());
+        ws = new WebSocket('ws://localhost:1337', "bus-" + $('#bus-nr').val());
         ws.addEventListener('error', function (event) {
             alert('Server is closed!');
         });

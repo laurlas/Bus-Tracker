@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io("client");
+    let ws = new WebSocket('ws://localhost:1337', "client");
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });
@@ -29,7 +29,6 @@ $(document).ready(function () {
             markersArray.push(marker);
         }
     };
-	
     function geolocate() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
