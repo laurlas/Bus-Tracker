@@ -16,10 +16,12 @@ app.get('/',function(req,res){
     res.sendFile(path.join(__dirname + '/client.html'));
 });
 
-ws.on('connection', function connection(ws) {
+ws.sockets.on('connection', function (socket) {
+    let endp = socket.manager.handshaken[socket.id].address;
+    let user= socket.manager.handshaken[socket.id].query.user;
     let bus = false;
-    if (ws.protocol) {
-        prot = ws.protocol.split('-');
+    if (user) {
+        prot = user.split('-');
         if (prot.length === 2) {
             ws.busNr = prot[1];
             busses.push(ws);
