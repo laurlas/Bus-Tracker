@@ -1,7 +1,7 @@
 $(document).ready(function () {
-
+let ws={};
     $(document).on('click', '#submit', function () {
-        let ws = io('ws://localhost:1337', "bus-" + $('#bus-nr').val());
+        ws = io("",{query: "protocol=bus-" + $('#bus-nr').val()});
         ws.addEventListener('error', function (event) {
             alert('Server is closed!');
         });

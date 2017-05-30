@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let ws = io('ws://localhost:1337', "client");
+    let ws = io("",{query: "protocol=client"});
     ws.addEventListener('error', function (event) {
         alert('Server is closed!');
     });

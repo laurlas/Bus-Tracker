@@ -17,6 +17,7 @@ app.get('/', function (req, res) {
 });
 
 ws.on('connection', function connection(ws) {
+    console.log(ws);
     let bus = false;
     if (ws.protocol) {
         prot = ws.protocol.split('-');
@@ -33,6 +34,8 @@ ws.on('connection', function connection(ws) {
         clients.push(ws);
     }
     ws.on('message', function incoming(message) {
+        console.log(message);
+
         let data = JSON.parse(message);
         if (bus === true) {
             ws.lat = data.lat;
