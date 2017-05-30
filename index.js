@@ -54,3 +54,4 @@ ws.on('connection', function connection(ws) {
 });
 let port = process.env.PORT || 1337;
 server.listen(port);
+console.log('hey');
