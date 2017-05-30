@@ -9,11 +9,11 @@ let busses = [];
 const express = require('express');
 app.use(express.static(__dirname + "/"));
 app.get('/bus', function (req, res) {
-    res.sendFile(path.join(__dirname + 'bus.html'));
+    res.sendFile(path.join(__dirname + '/bus.html'));
 });
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + 'client.html'));
+    res.sendFile(path.join(__dirname + '/client.html'));
 });
 
 ws.on('connection', function connection(ws) {
